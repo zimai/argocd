@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: python-helloworld 
+  name: nginx-staging
   namespace: argocd
 spec:
   destination:
@@ -9,7 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: python-manifests
+    helm:
+      valueFiles:
+      - values-staging.yaml
+    path: helm-exercise
     repoURL: https://github.com/zimai/argocd
     targetRevision: HEAD
-  syncPolicy: {}
